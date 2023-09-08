@@ -1,62 +1,71 @@
 ## usersテーブル
 
-| Column             | Type   | Options                              |
-| ------------------ | ------ | -----------                          |
-| nickname           | string | null: false                          |
-| email              | string | null: false, unique_constraint: true |
-| encrypted_password | string | null: false                          |
-| last_name_a        | string | null: false                          |
-| first_name_a       | string | null: false                          |
-| last_name_b        | string | null: false                          |
-| first_name_b       | string | null: false                          |
-| birthday           | string | null: false                          |
+| Column             | Type   | Options                     |
+| ------------------ | ------ | -----------                 |
+| nickname           | string | null: false                 |
+| email              | string | null: false, unique: true   |
+| encrypted_password | string | null: false                 |
+| last_name_kanji    | string | null: false                 |
+| first_name_kanji   | string | null: false                 |
+| last_name_kana     | string | null: false                 |
+| first_name_kana    | string | null: false                 |
+| birthday           | date   | null: false                 |
 
 ### Association
 - has_many :items
-- has_many :purchase-record
+- has_many :purchase_records
 
 ## itemsテーブル
 
-| Column          | Type       |Options                         |
-| --------------- | ------     | -----------                    |
-| category        | string     | null: false                    |
-| situation       | string     | null: false                    |
-| delivery_charge | string     | null: false                    |
-| region          | string     | null: false                    |
-| date            | string     | null: false                    |
-| price           | string     | null: false                    |
-| content         | text       | null: false                    |
-| users           | references | null: false, foreign_key: true |
+| Column             | Type       |Options                         |
+| ---------------    | ------     | -----------                    |
+| category_id        | integer    | null: false                    |
+| situation_id       | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| region_id          | integer    | null: false                    |
+| shipment_id        | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| item_name          | string     | null: false                    |
+| content            | text       | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to :purchase-record
+- belongs_to :user
+- belongs_to :category_id
+- belongs_to :situation_id
+- belongs_to :delivery_charge_id
+- belongs_to :region_id
+- belongs_to :shipment_id
+- has_one    :purchase_record
 
-### purchase-recordsテーブル
+### purchase_recordsテーブル
 
 | Column | Type       | Options                        |
 | ------ | ------     | -----------                    |
-| items  | references | null: false, foreign_key: true |
-| users  | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+| user   | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to :items
-- belongs_to :addresses
+- belongs_to :user
+- belongs_to :item
+- has_one    :address
 
 ### addressesテーブル
 
 | Column           | Type       | Options                        |
 | ------           | ----       | -------                        |
-| post_cord        | string     | null: false                    |
-| prefecture       | string     | null: false                    |
+| post_cord_id     | integer    | null: false                    |
+| region_id        | integer    | null: false                    |
 | city             | string     | null: false                    |
 | street           | string     | null: false                    |
-| building         | string     | null: false                    |
+| building         | string     |                                |
 | telephone        | string     | null: false                    |
+| purchase_record  | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :purchase-record
+- belongs_to :purchase_record
+- belongs_to :post_cord_id
+- belongs_to :region_id
 
 
 
