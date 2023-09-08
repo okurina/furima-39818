@@ -55,7 +55,7 @@
 | Column           | Type       | Options                        |
 | ------           | ----       | -------                        |
 | region_id        | integer    | null: false                    |
-| post_cord_id     | string     | null: false                    |
+| post_cord        | string     | null: false                    |
 | city             | string     | null: false                    |
 | street           | string     | null: false                    |
 | building         | string     |                                |
@@ -63,6 +63,5 @@
 | purchase_record  | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :post_cord_id
 - belongs_to :region_id
 - belongs_to :purchase_record
