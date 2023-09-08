@@ -30,12 +30,12 @@
 | user               | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
 - belongs_to :category_id
 - belongs_to :situation_id
 - belongs_to :delivery_charge_id
 - belongs_to :region_id
 - belongs_to :shipment_id
+- belongs_to :user
 - has_one    :purchase_record
 
 ### purchase_recordsテーブル
@@ -54,8 +54,8 @@
 
 | Column           | Type       | Options                        |
 | ------           | ----       | -------                        |
-| post_cord_id     | integer    | null: false                    |
 | region_id        | integer    | null: false                    |
+| post_cord_id     | string     | null: false                    |
 | city             | string     | null: false                    |
 | street           | string     | null: false                    |
 | building         | string     |                                |
@@ -63,10 +63,6 @@
 | purchase_record  | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :purchase_record
 - belongs_to :post_cord_id
 - belongs_to :region_id
-
-
-
-
+- belongs_to :purchase_record
