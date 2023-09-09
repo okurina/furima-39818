@@ -14,11 +14,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_090511) do
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "nickbane", null: false
+    t.string "nickname", null: false
     t.string "last_name_kanji", null: false
     t.string "first_name_kanji", null: false
     t.string "last_name_kana", null: false
-    t.string "fist_name_kana", null: false
+    t.string "first_name_kana", null: false
     t.date "birthday", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
