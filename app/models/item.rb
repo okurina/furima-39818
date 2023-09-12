@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   belongs_to :user
   has_one_attached :image
 
@@ -11,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :shipment
 
   with_options presence: true do
-    validates :item_name 
+    validates :item_name
     validates :content
     validates :image
   end
@@ -23,9 +22,8 @@ class Item < ApplicationRecord
     validates :region_id
     validates :shipment_id
   end
- 
-  validates :price, numericality: { with: /\A[0-9]+\z/, message: "には半角数字を使用してください" }
-  validates :price, presence: true,
-            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
+  validates :price, numericality: { with: /\A[0-9]+\z/, message: 'には半角数字を使用してください' }
+  validates :price, presence: true,
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end
