@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   
   belongs_to :category
   belongs_to :situation
-  belongs_to :delivery_charge
+  belongs_to :deliverycharge
   belongs_to :region
   belongs_to :shipment
 
