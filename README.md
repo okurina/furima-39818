@@ -30,11 +30,11 @@
 | user               | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :category_id
-- belongs_to :situation_id
-- belongs_to :delivery_charge_id
-- belongs_to :region_id
-- belongs_to :shipment_id
+- belongs_to :category
+- belongs_to :situation
+- belongs_to :deliverycharge
+- belongs_to :region
+- belongs_to :shipment
 - belongs_to :user
 - has_one    :purchase_record
 
@@ -63,5 +63,5 @@
 | purchase_record  | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :region_id
+- belongs_to :region
 - belongs_to :purchase_record
