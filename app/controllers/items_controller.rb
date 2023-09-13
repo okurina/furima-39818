@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    #@items = Item.all
+    @items = Item.includes(:user).order("created_at DESC")
   end
 
   def new
@@ -19,6 +19,8 @@ class ItemsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+
 
   private
 
