@@ -32,8 +32,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
+      it 'category_idで「1」を選択していると保存できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
       it 'situation_idを選択していないと保存できない' do
         @item.situation_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Situation can't be blank")
+      end
+      it 'situation_idで「1」を選択していると保存できない' do
+        @item.situation_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Situation can't be blank")
       end
@@ -42,13 +52,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
       end
+      it 'delivery_charge_idで「1」を選択していると保存できない' do
+        @item.delivery_charge_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
+      end
       it 'region_idを選択していないと保存できない' do
         @item.region_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Region can't be blank")
       end
+      it 'region_idで「1」を選択していると保存できない' do
+        @item.region_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Region can't be blank")
+      end
       it 'shipment_idを選択していないと保存できない' do
         @item.shipment_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipment can't be blank")
+      end
+      it 'shipment_idで「1」を選択していると保存できない' do
+        @item.shipment_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipment can't be blank")
       end
@@ -66,6 +91,11 @@ RSpec.describe Item, type: :model do
         @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+      end
+      it 'priceに小数点以下は入力できない' do
+        @item.price = '123456.7'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be an integer')
       end
       it 'priceは半角数字でないと保存できない' do
         @item.price = '１２３４５６'
