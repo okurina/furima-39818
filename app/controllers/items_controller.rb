@@ -53,11 +53,11 @@ class ItemsController < ApplicationController
 
   def move_to_index
     return if user_signed_in? && current_user == @item.user
+
     redirect_to action: :index
   end
 
   def set_item
     @item = Item.includes(:user).find(params[:id])
   end
-
 end
