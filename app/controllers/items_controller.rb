@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :destoroy]
+  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :set_item, only: [:show, :edit, :update, :move_to_index]
   before_action :move_to_index, only: :edit
-  before_action :set_tweet, only: [:show, :edit, :update]
-
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -47,12 +46,12 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.includes(:user).find(params[:id])
     return if user_signed_in? && current_user == @item.user
     redirect_to action: :index
   end
 
-  def set_tweet
+  def set_item
     @item = Item.includes(:user).find(params[:id])
   end
+  
 end
