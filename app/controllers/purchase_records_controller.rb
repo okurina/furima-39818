@@ -3,6 +3,7 @@ class PurchaseRecordsController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase_record_address = PurchaseRecordAddress.new
     if current_user == @item.user
       redirect_to root_path
@@ -16,6 +17,7 @@ class PurchaseRecordsController < ApplicationController
       @purchase_record_address.save
       redirect_to root_path
     else
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
     end
   end
@@ -31,7 +33,7 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_85976d4101092d63d9db9d9e" 
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @item.price,
       card: purchase_record_params[:token],
