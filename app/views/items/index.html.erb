@@ -133,19 +133,19 @@
             <div class='item-img-content'>
                 <%= image_tag(item.image.variant(resize: '500x500'), class: "item-img") %>
 
-                <%# 商品が売れていればsold outを表示しましょう %>
-                <%#<div class='sold-out'>
-                  <span>Sold Out!!</span>
-                </div>
-                <%# //商品が売れていればsold outを表示しましょう %>
-
+                <% if item.purchase_record %>
+                  <div class='sold-out'>
+                    <span>Sold Out!!</span>
+                  </div>
+                <% end %>
+                
             </div>
             <div class='item-info'>
               <h3 class='item-name'>
                 <%= item.item_name %>
               </h3>
               <div class='item-price'>
-                <span><%= item.price.to_s(:delimited) %>円<br><%= item.delivery_charge.name %></span>
+                <span><%= item.price.to_fs(:delimited) %>円<br><%= item.delivery_charge.name %></span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>                  
