@@ -54,17 +54,17 @@ RSpec.describe PurchaseRecordAddress, type: :model do
       it 'telephoneがハイフンを含んでいると保存できないこと' do
         @purchase_record_address.telephone = '090-1234-5678'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Telephone is invalid")
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone is invalid')
       end
       it 'telephoneが9文字以下だと保存できないこと' do
         @purchase_record_address.telephone = '090123456'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Telephone is invalid")
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone is invalid')
       end
       it 'telephoneが12文字以上だと保存できないこと' do
         @purchase_record_address.telephone = '090123456789'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Telephone is invalid")
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone is invalid')
       end
       it 'telephoneが全角数字だと保存できないこと' do
         @purchase_record_address.telephone = '０９０１２３４５６７８'
@@ -81,7 +81,7 @@ RSpec.describe PurchaseRecordAddress, type: :model do
         @purchase_record_address.valid?
         expect(@purchase_record_address.errors.full_messages).to include("Item can't be blank")
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @purchase_record_address.token = nil
         @purchase_record_address.valid?
         expect(@purchase_record_address.errors.full_messages).to include("Token can't be blank")

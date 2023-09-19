@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    return if user_signed_in? && current_user == @item.user && !@item.purchase_record 
+    return if user_signed_in? && current_user == @item.user && !@item.purchase_record
 
     redirect_to action: :index
   end
