@@ -2,9 +2,9 @@ class PurchaseRecordsController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
   before_action :authenticate_user!, except: [:index, :create]
+  before_action :pay_key, only: [:index, :create]
 
   def index
-    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @purchase_record_address = PurchaseRecordAddress.new
     return unless current_user == @item.user || @item.purchase_record
 
@@ -18,7 +18,6 @@ class PurchaseRecordsController < ApplicationController
       @purchase_record_address.save
       redirect_to root_path
     else
-      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render :index, status: :unprocessable_entity
     end
   end
@@ -40,6 +39,10 @@ class PurchaseRecordsController < ApplicationController
     return if user_signed_in?
 
     redirect_to root_path
+  end
+
+  def pay_key
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
   end
 
   def pay_item
