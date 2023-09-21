@@ -78,6 +78,10 @@ group :development do
   gem 'rubocop', require: false
 end
 
+group :production do
+  gem 'unicorn', '6.1.0'
+end
+
 gem 'devise'
 gem 'pry-rails'
 
@@ -88,7 +92,3 @@ gem 'image_processing', '~> 1.2'
 gem 'payjp'
 gem 'gon'
 gem "aws-sdk-s3", require: false
-
-group :production do
-  gem 'unicorn', '6.1.0'
-end
